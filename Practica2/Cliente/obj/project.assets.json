@@ -305,11 +305,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\annaa\\Downloads\\P2- Proyecto Base (1)\\Cliente\\Cliente.csproj",
+      "projectUniqueName": "C:\\Users\\annaa\\OneDrive\\Escritorio\\PracticasSSDD\\Pr-cticasSSDD\\Practica2\\Cliente\\Cliente.csproj",
       "projectName": "Cliente",
-      "projectPath": "C:\\Users\\annaa\\Downloads\\P2- Proyecto Base (1)\\Cliente\\Cliente.csproj",
+      "projectPath": "C:\\Users\\annaa\\OneDrive\\Escritorio\\PracticasSSDD\\Pr-cticasSSDD\\Practica2\\Cliente\\Cliente.csproj",
       "packagesPath": "C:\\Users\\annaa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\annaa\\Downloads\\P2- Proyecto Base (1)\\Cliente\\obj\\",
+      "outputPath": "C:\\Users\\annaa\\OneDrive\\Escritorio\\PracticasSSDD\\Pr-cticasSSDD\\Practica2\\Cliente\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\annaa\\AppData\\Roaming\\NuGet\\NuGet.Config"

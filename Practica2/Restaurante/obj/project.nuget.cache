@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "N6I+/nlfjaA=",
+  "dgSpecHash": "R4Tz73Orn2c=",
   "success": true,
-  "projectFilePath": "C:\\Users\\annaa\\Downloads\\P2- Proyecto Base (1)\\Restaurante\\Restaurante.csproj",
+  "projectFilePath": "C:\\Users\\annaa\\OneDrive\\Escritorio\\PracticasSSDD\\Pr-cticasSSDD\\Practica2\\Restaurante\\Restaurante.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\annaa\\.nuget\\packages\\google.protobuf\\3.30.2\\google.protobuf.3.30.2.nupkg.sha512",
     "C:\\Users\\annaa\\.nuget\\packages\\grpc.aspnetcore\\2.71.0\\grpc.aspnetcore.2.71.0.nupkg.sha512",

@@ -305,11 +305,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\annaa\\Downloads\\P2- Proyecto Base (1)\\Repartidor\\Repartidor.csproj",
+      "projectUniqueName": "C:\\Users\\annaa\\OneDrive\\Escritorio\\PracticasSSDD\\Pr-cticasSSDD\\Practica2\\Repartidor\\Repartidor.csproj",
       "projectName": "Repartidor",
-      "projectPath": "C:\\Users\\annaa\\Downloads\\P2- Proyecto Base (1)\\Repartidor\\Repartidor.csproj",
+      "projectPath": "C:\\Users\\annaa\\OneDrive\\Escritorio\\PracticasSSDD\\Pr-cticasSSDD\\Practica2\\Repartidor\\Repartidor.csproj",
       "packagesPath": "C:\\Users\\annaa\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\annaa\\Downloads\\P2- Proyecto Base (1)\\Repartidor\\obj\\",
+      "outputPath": "C:\\Users\\annaa\\OneDrive\\Escritorio\\PracticasSSDD\\Pr-cticasSSDD\\Practica2\\Repartidor\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\annaa\\AppData\\Roaming\\NuGet\\NuGet.Config"
