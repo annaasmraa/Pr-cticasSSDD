@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+
+option csharp_namespace = "Repartidor.Protos";
+
+package restaurante;
+
+// The restaurant service definition
+service RestauranteService {
+  // Take an order for delivery
+  rpc TomarPedidoParaRepartir (google.protobuf.Empty) returns (PedidoResponse);
+}
+
+// The response message containing the order ID
+message PedidoResponse {
+  string id_pedido = 1;
+  int32 distancia = 2;
+}
+
+
+

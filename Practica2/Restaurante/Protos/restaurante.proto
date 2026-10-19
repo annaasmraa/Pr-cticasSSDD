@@ -1,0 +1,45 @@
+syntax = "proto3";
+
+option csharp_namespace = "Restaurante.Protos";
+
+package restaurante;
+
+import "google/protobuf/empty.proto";
+
+// The restaurant service definition
+service RestauranteService {
+ // Make an order
+  … HacerPedido (PedidoRequest) returns (PedidoResponse);
+// Get order status
+  … ConsultarEstadoPedido (ConsultaRequest) returns (EstadoResponse);
+// For couriers: wait until a ready order is available and take it for delivery
+  … TomarPedidoParaRepartir (google.protobuf.Empty) returns (PedidoResponse);
+// Check the dishes of the order
+  … ConsultarPlatosPedido(ConsultaRequest) returns (PedidoResponse);
+}
+
+// The request message containing order details
+message PedidoRequest {
+  … PlatoPedido platos = …;
+  … distancia = …;
+}
+// A dish in the order
+message PlatoPedido {
+  … nombre = 1;
+  … cantidad = 2;
+}
+// The response message containing the order ID
+message PedidoResponse {
+  … id_pedido = …;
+  … mensaje = …;  
+}
+// The request message for checking order status
+message ConsultaRequest {
+  … id_pedido = …;
+}
+// The response message containing order status
+message EstadoResponse {
+  … estado = …;
+  … mensaje = …;
+  … tiempo_estimado = …;
+}
