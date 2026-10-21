@@ -15,19 +15,29 @@ public class RestauranteClientService
         _serverAddress = serverAddress;
     }
 
-    public Task ConnectAsync()
+    public async Task ConnectAsync()
     {
-        _channel = GrpcChannel.ForAddress(_serverAddress);
-        _client = new RestauranteService.RestauranteServiceClient(_channel);
-        return Task.CompletedTask;
+        // If using unencrypted HTTP/2 (http://) enable the switch (only for development) 
+        if (_serverAddress.StartsWith("http://", StringComparison.OrdinalIgnoreCase)) 
+            { 
+                AppContext.SetSwitch("System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport", true); 
+            } 
+        // Prepare channel options.  
+        var channelOptions = new GrpcChannelOptions(); 
+        //En el fichero proporcionado podéis comprobar que un apartado para conectar si usamos https (no requerido en esta práctica). 
+        _channel = GrpcChannel.ForAddress(_serverAddress, channelOptions); 
+        _client = new RestauranteService.RestauranteServiceClient(_channel); 
+        Console.WriteLine($"Conectado al servidor en {_serverAddress}"); 
     }
 
-    public Task DisconnectAsync()
+    public async Task DisconnectAsync()
     {
-        _channel?.Dispose();
-        _channel = null;
-        _client = null;
-        return Task.CompletedTask;
+        if (_channel !=null )
+        {
+            await _channel.ShutdownAsync();
+            Console.WriteLine("Desconectado del servidor");
+        }
+        
     }
 
     private void EnsureConnected()
@@ -39,16 +49,79 @@ public class RestauranteClientService
     }
 
     public async Task<PedidoResponse> HacerPedidoAsync(List<(string nombre, int cantidad)> platos, int distancia)
-    {
-        EnsureConnected(); // No eliminar
+{
+    EnsureConnected();
 
-        throw new Exception(); // Eliminar y sustituir por el código que implementa el pseudocódigo
+    // Crear el objeto PedidoRequest
+    var pedidoRequest = new PedidoRequest();
+
+    // Añadir cada plato al pedido
+    foreach (var (nombre, cantidad) in platos)
+    {
+        pedidoRequest.Platos.Add(new PlatoPedido { Nombre = nombre, Cantidad = cantidad });
     }
 
-    public async Task<EstadoResponse> ConsultarEstadoPedidoAsync(string idPedido)
-    {
-        EnsureConnected();
+    // Asignar la distancia
+    pedidoRequest.Distancia = distancia;
 
-        throw new Exception(); // Eliminar y sustituir por el código que implementa el pseudocódigo
+    try
+    {
+        // Enviar el pedido al servidor
+        var response = await _client.HacerPedidoAsync(pedidoRequest);
+
+        // Mostrar el identificador del pedido y el mensaje recibido
+        Console.WriteLine($"ID del pedido: {response.IdPedido}");
+        Console.WriteLine($"Mensaje: {response.Mensaje}");
+
+        // Devolver la respuesta
+        return response;
     }
+    catch (Exception ex)
+    {
+        // Mostrar el mensaje de error
+        Console.WriteLine($"Error al enviar el pedido: {ex.Message}");
+
+        // Relanzar la excepción
+        throw;
+    }
+}
+
+
+ public async Task<EstadoResponse> ConsultarEstadoPedidoAsync(string idPedido)
+{
+    EnsureConnected();
+
+    try
+    {
+        // Verificar si el cliente espera un string o un int
+        // Intentamos usar el valor directamente como string (por si el cliente lo espera así)
+        var consultaRequest = new ConsultaRequest
+        {
+            IdPedido = idPedido 
+        };
+
+        // Invocar el método en el servidor
+        var response = await _client.ConsultarEstadoPedidoAsync(consultaRequest);
+
+        // Mostrar el estado y el tiempo estimado del pedido
+        Console.WriteLine($"Estado del pedido: {response.Estado}");
+        Console.WriteLine($"Tiempo estimado: {response.TiempoEstimado} minutos");
+        Console.WriteLine($"Mensaje: {response.Mensaje}");
+
+        // Devolver la respuesta
+        return response;
+    }
+    catch (Exception ex)
+    {
+        // Mostrar el mensaje de error
+        Console.WriteLine($"Error al consultar el estado del pedido: {ex.Message}");
+
+        // Relanzar la excepción
+        throw;
+    }
+}
+
+
+
+
 }

@@ -9,37 +9,37 @@ import "google/protobuf/empty.proto";
 // The restaurant service definition
 service RestauranteService {
  // Make an order
-  … HacerPedido (PedidoRequest) returns (PedidoResponse);
+  rpc HacerPedido (PedidoRequest) returns (PedidoResponse);
 // Get order status
-  … ConsultarEstadoPedido (ConsultaRequest) returns (EstadoResponse);
+  rpc ConsultarEstadoPedido (ConsultaRequest) returns (EstadoResponse);
 // For couriers: wait until a ready order is available and take it for delivery
-  … TomarPedidoParaRepartir (google.protobuf.Empty) returns (PedidoResponse);
+  rpc TomarPedidoParaRepartir (google.protobuf.Empty) returns (PedidoResponse);
 // Check the dishes of the order
-  … ConsultarPlatosPedido(ConsultaRequest) returns (PedidoResponse);
+  rpc ConsultarPlatosPedido(ConsultaRequest) returns (PedidoResponse);
 }
 
 // The request message containing order details
 message PedidoRequest {
-  … PlatoPedido platos = …;
-  … distancia = …;
+  repeated PlatoPedido platos = 1;
+  int32 distancia = 2;
 }
 // A dish in the order
 message PlatoPedido {
-  … nombre = 1;
-  … cantidad = 2;
+  string nombre = 1;
+  int32 cantidad = 2;
 }
 // The response message containing the order ID
 message PedidoResponse {
-  … id_pedido = …;
-  … mensaje = …;  
+  int32 id_pedido = 1;
+  string mensaje = 2;  
 }
 // The request message for checking order status
 message ConsultaRequest {
-  … id_pedido = …;
+  int32 id_pedido = 1;
 }
 // The response message containing order status
 message EstadoResponse {
-  … estado = …;
-  … mensaje = …;
-  … tiempo_estimado = …;
+  string estado = 1;
+  string mensaje = 2;
+  int32 tiempo_estimado = 3;
 }
